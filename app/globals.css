@@ -1,8 +1,36 @@
 @import "tailwindcss";
 
+/* ================== THEME & RESET ================== */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Next tokens */
+  --background: #0b1120;
+  --foreground: #0f172a;
+
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+
+  /* Cinema theme – sáng hơn bản cũ */
+  --bg-body: #020617;
+  --bg-main: #020617;
+  --bg-surface: #0b1120; /* khu vực nội dung */
+  --bg-card: #0f172a;    /* thẻ, panel */
+  --bg-card-soft: #111827;
+
+  --text-main: #f9fafb;
+  --text-muted: #9ca3af;
+
+  --accent: #2563eb;
+  --accent-strong: #1d4ed8;
+  --accent-soft-bg: #eff6ff;
+  --accent-soft-text: #1d4ed8;
+
+  --danger: #ef4444;
+
+  --border-soft: rgba(148, 163, 184, 0.35);
+  --radius-lg: 1.25rem;
+  --radius-md: 0.9rem;
+  --shadow-soft: 0 12px 32px rgba(15, 23, 42, 0.55);
 }
 
 @theme inline {
@@ -12,15 +40,1000 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Reset nhỏ */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
+html,
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  color: inherit;
+}
+
+/* ================== BODY & LAYOUT ================== */
+
+body {
+  background: radial-gradient(circle at top, #1d2950 0, #020617 45%);
+  color: var(--text-main);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text",
+    "Helvetica Neue", Arial, sans-serif;
+}
+
+.app-main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 32px 20px 40px;
+}
+
+/* ================== NAVBAR ================== */
+
+.navbar {
+  background: #020617;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.9);
+  color: #e5e7eb;
+  padding: 12px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.nav-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: radial-gradient(circle at 20% 20%, #38bdf8, #1e40af);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f9fafb;
+  font-size: 18px;
+}
+
+/* dùng cho khu vực link */
+.nav-links,
+.nav-center {
+  display: flex;
+  gap: 28px;
+  font-size: 15px;
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #e5e7eb;
+  position: relative;
+  padding-bottom: 4px;
+}
+
+.nav-link:hover {
+  color: #bfdbfe;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(to right, #38bdf8, #2563eb);
+  transition: width 0.18s ease-out;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+.nav-link.active {
+  color: #ffffff;
+}
+
+.nav-link.active::after {
+  width: 100%;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.btn-outline {
+  border-radius: 999px;
+  padding: 6px 16px;
+  border: 1px solid rgba(148, 163, 184, 0.8);
+  background: transparent;
+  color: #e5e7eb;
+  font-size: 14px;
+}
+
+.btn-primary {
+  border-radius: 999px;
+  padding: 7px 18px;
+  border: none;
+  background: linear-gradient(to right, #2563eb, #1d4ed8);
+  color: #f9fafb;
+  font-size: 14px;
+}
+
+.nav-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: linear-gradient(to right, #2563eb, #1d4ed8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 8px 20px rgba(37, 99, 235, 0.6);
+}
+
+/* ================== HERO HOME ================== */
+
+/* ================== HERO HOME ================== */
+/* ===== HERO LAYOUT (2 CỘT) ===== */
+
+.hero {
+  margin-top: 32px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 32px;
+  align-items: center;       /* canh 2 bên giữa theo chiều dọc */
+}
+
+.hero-left {
+  padding: 24px 8px 24px 8px;
+}
+
+.hero-kicker {
+  font-size: 14px;
+  letter-spacing: 0.16em;
+  color: #a5b4fc;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.hero-title {
+  font-size: 48px;
+  line-height: 1.08;
+  font-weight: 800;
+  margin: 0 0 12px;
+}
+
+.hero-title span.accent {
+  color: #22d3ee;
+}
+
+.hero-subtitle {
+  font-size: 16px;
+  color: #cbd5f5;
+  max-width: 480px;
+  line-height: 1.6;
+  margin-bottom: 18px;
+}
+
+.hero-quote {
+  margin-top: 14px;
+  font-size: 14px;
+  color: #e5e7eb;
+  font-style: italic;
+  border-left: 3px solid #38bdf8;
+  padding-left: 10px;
+}
+
+.hero-actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 14px;
+}
+
+
+/* bọc toàn bộ phần bên phải của hero */
+.hero-right-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end; /* nếu muốn dots canh bên phải card */
+  gap: 10px;
+}
+
+/* card poster */
+.hero-right {
+  width: 100%;
+  max-width: 640px;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(15, 23, 42, 0.85);
+}
+
+/* vùng chứa ảnh */
+.hero-right-poster {
+  position: relative;
+  width: 100%;
+  height: 260px;           /* chỉnh cho vừa mắt, muốn cao hơn thì tăng lên 300–320 */
+}
+
+/* overlay tối trên ảnh */
+.hero-right-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0.2) 0%,
+    rgba(15, 23, 42, 0.75) 70%
+  );
+}
+
+/* text trên ảnh */
+.hero-right-content {
+  position: absolute;
+  inset: 20px 24px 20px 24px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.hero-tag {
+  align-self: flex-start;
+  padding: 6px 18px;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.85);
+  color: #e5e7eb;
+  font-size: 13px;
+}
+
+.hero-movie-title {
+  font-size: 22px;
+  font-weight: 600;
+  color: #f9fafb;
+  max-width: 80%;
+}
+
+/* ----- Dots BÊN DƯỚI CARD ----- */
+.hero-dots {
+  display: flex;
+  gap: 8px;
+  /* muốn nằm sát mép trái card thì đổi thành align-items:flex-start
+     và bỏ align-items ở .hero-right-wrapper nếu cần */
+}
+
+.hero-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  border: none;
+  padding: 0;
+  background: rgba(148, 163, 184, 0.4);
+  cursor: pointer;
+}
+
+.hero-dot.active {
+  width: 20px;
+  background: #38bdf8;
+}
+
+
+
+/* ================== SECTION HEADER ================== */
+
+.section-header {
+  margin: 32px 0 16px;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.section-title {
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.section-subtitle {
+  font-size: 14px;
+  color: var(--text-muted);
+}
+
+.section-link {
+  font-size: 14px;
+  color: #93c5fd;
+  text-decoration: none;
+}
+
+/* ================== MOVIE LIST / CARDS ================== */
+
+/* ================== MOVIE LIST / CARDS ================== */
+
+.movies-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 20px;
+}
+
+/* Card wrapper */
+.movie-card {
+  background: var(--bg-card);
+  border-radius: 20px;
+  border: 1px solid rgba(30, 64, 175, 0.6);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 340px;
+}
+
+/* Poster */
+.movie-card-poster {
+  position: relative;
+  height: 220px;
+  overflow: hidden;
+}
+
+.movie-card-poster::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0;
+  height: 40%;
+  background: linear-gradient(to top, rgba(15, 23, 42, 0.9), transparent);
+}
+
+/* HOT badge */
+.movie-badge-hot {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: linear-gradient(to right, #f97316, #ea580c);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* Rating chip */
+.movie-badge-rating {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  background: rgba(15, 23, 42, 0.95);
+  color: #fde68a;
+  font-size: 12px;
+  padding: 4px 9px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.movie-badge-rating .icon {
+  font-size: 12px;
+}
+
+/* Body */
+.movie-card-body {
+  padding: 14px 16px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex: 1;
+}
+
+.movie-title {
+  font-weight: 600;
+  font-size: 16px;
+}
+
+/* Release + duration (tách ngày và giờ) */
+.movie-meta-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+
+/* Showtime text */
+.movie-genre {
+  font-size: 13px;
+  color: var(--text-muted);
+  margin-top: 4px;
+}
+
+/* Action buttons */
+.movie-actions {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+}
+
+/* Book button – nổi bật */
+.movie-btn-book {
+  flex: 1;
+  background: linear-gradient(to right, #2563eb, #1d4ed8);
+  color: #fff;
+  border-radius: 999px;
+  padding: 8px 12px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  border: none;
+  box-shadow: 0 10px 25px rgba(37, 99, 235, 0.35);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+
+.movie-btn-book:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 30px rgba(37, 99, 235, 0.5);
+  opacity: 0.95;
+}
+
+/* Details button – phụ nhưng vẫn rõ */
+.movie-btn-details {
+  flex: 1;
+  border-radius: 999px;
+  padding: 8px 12px;
+  text-align: center;
+  font-size: 14px;
+  text-decoration: none;
+  border: 1px solid rgba(148, 163, 184, 0.7);
+  color: var(--text-muted);
+  background: transparent;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.movie-btn-details:hover {
+  background: rgba(15, 23, 42, 0.9);
+  border-color: rgba(148, 163, 184, 1);
+  color: #e5e7eb;
+}
+
+
+
+/* ================== PAGE PANEL / DETAIL ================== */
+
+.page-panel {
+  margin-top: 32px;
+  background: var(--bg-card);
+  border-radius: 24px;
+  border: 1px solid var(--border-soft);
+  box-shadow: var(--shadow-soft);
+  padding: 20px 22px;
+}
+
+.movie-detail-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1.5fr);
+  gap: 32px;
+}
+
+.movie-detail-card {
+  background: var(--bg-card);
+  border-radius: 24px;
+  padding: 18px 20px 20px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border-soft);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  border-radius: 999px;
+  background: var(--accent-soft-bg);
+  color: var(--accent-soft-text);
+  padding: 4px 10px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* ================== SHOWTIMES ================== */
+
+.showtimes-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.showtimes-tab {
+  min-width: 80px;
+  padding: 8px 10px;
+  border-radius: 14px;
+  border: 1px solid var(--border-soft);
+  background: var(--bg-surface);
+  color: #e5e7eb;
+  font-size: 13px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.showtimes-tab-sub {
+  font-size: 11px;
+  color: #a5b4fc;
+}
+
+.showtimes-tab.active {
+  background: linear-gradient(to right, #2563eb, #1d4ed8);
+  border-color: transparent;
+}
+
+.showtimes-list {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.showtime-movie-card {
+  background: var(--bg-card);
+  border-radius: 18px;
+  padding: 14px 16px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border-soft);
+}
+
+.showtime-movie-left {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+.showtime-poster {
+  position: relative;
+  width: 90px;
+  height: 120px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.showtime-movie-title {
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+
+.showtime-rating-chip {
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  background: var(--accent-soft-bg);
+  color: var(--accent-soft-text);
+  display: inline-block;
+}
+
+.showtime-times {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.showtime-time-card {
+  min-width: 130px;
+  padding: 8px 10px;
+  border-radius: 10px;
+  border: 1px solid var(--border-soft);
+  background: var(--bg-surface);
+  font-size: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.showtime-time {
+  font-weight: 600;
+}
+
+.showtime-screen-index {
+  font-size: 11px;
+  color: var(--text-muted);
+}
+
+.showtime-price {
+  font-size: 12px;
+  color: #4ade80;
+  font-weight: 600;
+}
+
+.showtime-btn {
+  margin-top: 4px;
+  text-align: center;
+  border-radius: 6px;
+  background: linear-gradient(to right, #2563eb, #1d4ed8);
+  color: #fff;
+  padding: 4px 0;
+  text-decoration: none;
+  font-size: 12px;
+}
+
+.showtime-viewdetails {
+  margin-top: 8px;
+  font-size: 13px;
+  text-align: right;
+}
+
+.showtime-viewdetails a {
+  color: #93c5fd;
+  text-decoration: none;
+}
+
+/* ================== SELECT SEAT ================== */
+
+.select-seat-page {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.4fr);
+  gap: 24px;
+}
+
+.select-seat-left {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.select-poster {
+  position: relative;
+  width: 100%;
+  height: 420px;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border-soft);
+}
+
+.select-info-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border-soft);
+}
+
+.select-seat-right {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  padding: 16px 18px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border-soft);
+}
+
+.seat-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: 16px;
+}
+
+.seat-panel {
+  text-align: center;
+}
+
+.seat-screen {
+  background: #1f2937;
+  padding: 6px 0;
+  border-radius: 999px;
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+.seat-grid {
+  display: inline-grid;
+  grid-template-columns: repeat(5, 40px);
+  gap: 8px;
+}
+
+.seat {
+  width: 40px;
+  height: 34px;
+  border-radius: 8px;
+  border: 1px solid #4b5563;
+  font-size: 11px;
+  background: #020617;
+  color: #e5e7eb;
+  cursor: pointer;
+}
+
+.seat-booked {
+  background: #fecaca;
+  border-color: #f97373;
+  color: #7f1d1d;
+  cursor: not-allowed;
+}
+
+.seat-selected {
+  background: #2563eb;
+  border-color: #2563eb;
+  color: #fff;
+}
+
+.seat-legend {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 12px;
+  font-size: 12px;
+}
+
+.seat.sample {
+  margin-right: 6px;
+}
+
+.seat.sample.available {
+  background: #020617;
+}
+
+.seat.sample.selected {
+  background: #2563eb;
+}
+
+.seat.sample.booked {
+  background: #fecaca;
+}
+
+.booking-summary-card {
+  border-left: 1px solid var(--border-soft);
+  padding-left: 16px;
+  font-size: 13px;
+}
+
+.booking-summary-card h3 {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.booking-summary-row {
+  margin-bottom: 4px;
+}
+
+.booking-summary-row.total {
+  margin-top: 6px;
+  font-weight: 600;
+}
+
+.booking-btn {
+  margin-top: 10px;
+  width: 100%;
+  border-radius: 999px;
+  padding: 8px 0;
+  background: linear-gradient(to right, #2563eb, #1d4ed8);
+  color: #fff;
+  border: none;
+  font-size: 14px;
+}
+
+/* ================== PAYMENT ================== */
+
+.payment-card {
+  background: var(--bg-card);
+  border-radius: 24px;
+  padding: 18px 20px;
+  box-shadow: var(--shadow-soft);
+  max-width: 640px;
+  border: 1px solid var(--border-soft);
+}
+
+.payment-form {
+  font-size: 13px;
+}
+
+.payment-row {
+  margin-bottom: 8px;
+}
+
+.payment-row label {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.payment-grid {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+}
+
+.form-group input,
+.form-group select {
+  border-radius: 8px;
+  border: 1px solid #4b5563;
+  background: #020617;
+  color: #e5e7eb;
+  padding: 6px 8px;
+  font-size: 13px;
+}
+
+.payment-options {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.payment-options label {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.pay-btn {
+  margin-top: 14px;
+  width: 140px;
+  border-radius: 999px;
+  padding: 8px 16px;
+  background: linear-gradient(to right, #2563eb, #1d4ed8);
+  color: #fff;
+  border: none;
+}
+
+/* ================== BOOKING SUCCESS ================== */
+
+.success-card {
+  background: var(--bg-card);
+  border-radius: 24px;
+  padding: 20px 22px;
+  box-shadow: var(--shadow-soft);
+  max-width: 520px;
+  border: 1px solid var(--border-soft);
+}
+
+.success-icon {
+  width: 56px;
+  height: 56px;
+  border-radius: 999px;
+  border: 3px solid #22c55e;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #22c55e;
+  font-size: 28px;
+  margin-bottom: 10px;
+}
+
+.success-title {
+  font-size: 24px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.success-note {
+  font-size: 13px;
+  background: rgba(250, 250, 170, 0.07);
+  border-radius: 6px;
+  padding: 6px 10px;
+  margin-bottom: 14px;
+  border: 1px solid rgba(250, 204, 21, 0.4);
+}
+
+.success-info {
+  font-size: 13px;
+}
+
+.success-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+/* ================== BOOKING HISTORY ================== */
+
+.history-grid {
+  margin-top: 14px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.history-card {
+  flex: 1 1 340px;
+  background: var(--bg-card);
+  border-radius: 24px;
+  padding: 14px 16px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border-soft);
+}
+
+.history-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.history-title {
+  font-weight: 600;
+}
+
+.badge-status {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.badge-status.completed {
+  background: #dcfce7;
+  color: #16a34a;
+}
+
+.badge-status.cancelled {
+  background: #fee2e2;
+  color: #ef4444;
+}
+
+.history-body {
+  margin-top: 8px;
+  font-size: 13px;
+}
+
+.history-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+/* ================== PROFILE ================== */
+
+.profile-card {
+  max-width: 520px;
+  background: var(--bg-card);
+  border-radius: 24px;
+  padding: 18px 20px;
+  box-shadow: var(--shadow-soft);
+  border: 1px solid var(--border-soft);
+}
+
+.profile-form {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.profile-form .form-group input {
+  width: 100%;
+}
+
+.profile-actions {
+  margin-top: 8px;
+  display: flex;
+  gap: 8px;
+}
+
+.save-btn {
+  border-radius: 999px;
+  padding: 8px 16px;
+  border: none;
+  background: linear-gradient(to right, #2563eb, #1d4ed8);
+  color: #fff;
+  font-size: 13px;
+}
+
+.link-btn {
+  border: none;
+  background: transparent;
+  color: #93c5fd;
+  font-size: 13px;
 }
